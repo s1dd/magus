@@ -17,6 +17,19 @@ Add ```s1dd/magus``` to the ```repositories``` section of your ```composer.json`
 }
 ```
 
+...and as a dependency
+
+```json
+{
+  ...
+  "require": {
+    "laravel/framework": "4.2.*",
+    "s1dd/magus": "dev-master"
+  },
+  ...
+}
+```
+
 Add the Service Provider to your ```app/config/app.php```:
 
 ```php
