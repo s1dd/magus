@@ -26,12 +26,6 @@ class Magus {
 
   public function parseString($string) {
 
-    dd(call_user_func(Config::get('s1dd/magus::test')));
-
-    // DEBUG
-
-    // return $this->mutate('facebook', 'facebook');
-
     ini_set("auto_detect_line_endings", "1"); 
 
     $rows = str_getcsv($string, "\r\n");
@@ -55,31 +49,53 @@ class Magus {
 
     if (is_string($type)) $type = studly_case($type);
 
-    $fieldmap = \Fieldmap::ofType($type)->get()->toArray();
+    $config = Config::get('s1dd/magus::fieldmaps.maps');
 
-    foreach ($fieldmap as $field) {
+    $resolvedFields = [];
 
-      if (isset($data[$field['value']])) {
+    if ( isset( $config[$type] ) ) $fieldmap = $config[$type];
+    else                           $fieldmap = [];
 
-        $resolvedFields[$field['key']] = $this->mutate($field['key'], $data[$field['value']]);
+    foreach ($fieldmap as $key => $field) {
+
+      $key = strtolower($key);
+
+      if (isset($data[$key])) {
+
+        $resolvedFields[$field] = $this->mutate([
+          'from' => $key,
+          'value'   => $data[$key],
+          'type' => $type
+        ]);
 
       }
 
     }
 
-
     // resolving string $type out of IoC container
     return \App::make($type)->create($resolvedFields);
   }
 
-  private function mutate($key, $value) {
+  private function mutate(array $options) {
+
+    $config = array_change_key_case(Config::get('s1dd/magus::' . $options['type'] ));
 
     // TODO: dynamically load classes instead of using an array
-    if (in_array($key, ['facebook', 'foursquare', 'google', 'twitter', 'yelp'])) {
-      return call_user_func(__NAMESPACE__.'\Mutators\\'.studly_case($key).'::'.$key, $value);
+    if ( in_array($options['from'], ['facebook', 'foursquare', 'google', 'twitter', 'yelp']) ) {
+
+      return call_user_func(__NAMESPACE__.'\Mutators\\'.studly_case($options['from']).'::'.$options['from'], $options['value']);
+
+    } else if ( isset($config[$options['from']]) ) {
+
+      $closure = $config[$options['from']];
+
+      return call_user_func($closure, $options['value']);
+
     }
     else {
-      return call_user_func(__NAMESPACE__.'\Mutators\Client::' . studly_case($key), $value);
+
+      return call_user_func(__NAMESPACE__.'\Mutators\Client::' . studly_case($options['from']), $options['value']);
+
     }
 
   }

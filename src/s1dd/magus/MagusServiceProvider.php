@@ -15,8 +15,6 @@ class MagusServiceProvider extends ServiceProvider {
 
 		$this->package('s1dd/magus', 's1dd/magus');
 
-		Config::addNamespace('magus', app_path() . 'config/packages/s1dd/magus/');
-
 	}
 
 	/**
@@ -41,7 +39,7 @@ class MagusServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('magus');
+		return ['magus'];
 	}
 
 }

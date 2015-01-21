@@ -1,9 +1,11 @@
-<?php namespace S1dd\Magus\Mutators;
+<?php
 
 return [
 
-  'test' => function () {
+  'test' => function() {
+
     return 'test';
+
   }
 
 ];
