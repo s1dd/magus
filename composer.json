@@ -1,0 +1,20 @@
+{
+    "name": "s1dd/magus",
+    "description": "",
+    "authors": [
+        {
+            "name": "magus",
+            "email": "sidd@sidd.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "S1dd\\Magus": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
