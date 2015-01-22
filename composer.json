@@ -1,10 +1,12 @@
 {
     "name": "s1dd/magus",
-    "description": "",
+    "description": "Import data (with CSV/JSON parsing built-in) into any Laravel Model",
     "authors": [
         {
             "name": "magus",
-            "email": "sidd@sidd.com"
+            "email": "sidd@sidd.com",
+            "homepage": "https://sidd.com",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -15,6 +17,5 @@
         "psr-0": {
             "S1dd\\Magus": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
