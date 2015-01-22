@@ -11,6 +11,11 @@ class MagusServiceProvider extends ServiceProvider {
 	 */
 	protected $defer = false;
 
+	/**
+	 * Boot the Magus package.
+	 *
+	 * @return $this
+	 */
 	public function boot() {
 
 		$this->package('s1dd/magus', 's1dd/magus');
