@@ -1,6 +1,10 @@
 {
     "name": "s1dd/magus",
     "description": "Import data (with CSV/JSON parsing built-in) into any Laravel Model",
+    "keywords": ["laravel", "import", "csv", "json", "model"],
+    "homepage": "https://github.com/s1dd/magus",
+
+    "license": "MIT",
     "authors": [
         {
             "name": "magus",
